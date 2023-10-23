@@ -33,7 +33,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))
     })
-    .bind(("127.0.0.1", listen_port))?
+    .bind(("0.0.0.0", listen_port))?
     .run()
     .await
 }
