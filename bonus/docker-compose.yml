@@ -1,0 +1,52 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: bitnami/wordpress
+    restart: always
+    expose:
+      - '8080'
+    deploy:
+      replicas: 2
+    environment:
+      WORDPRESS_DATABASE_HOST: 'MySQL'
+      WORDPRESS_DATABASE_USER: 'h4h4'
+      WORDPRESS_DATABASE_PASSWORD: '34syp4ss'
+      WORDPRESS_DATABASE_NAME: 'wp'
+      ALLOW_EMPTY_PASSWORD: 'yes'
+    # volumes:
+    #   - ./wp-config.php:/bitnami/wordpress/wp-config.php:rw
+    networks:
+      - front-network
+      - db-network
+    depends_on:
+      - MySQL
+
+  MySQL:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'wp'
+      MYSQL_USER: 'h4h4'
+      MYSQL_PASSWORD: '34syp4ss'
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    networks:
+      - db-network
+
+  proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8081:80
+    depends_on: 
+      - wordpress
+    networks:
+      - front-network
+
+networks:
+  front-network:
+    driver: bridge
+  db-network:
+    driver: bridge

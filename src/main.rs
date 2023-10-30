@@ -1,6 +1,7 @@
 use actix_web::{get, App, HttpResponse, HttpServer, Responder, HttpRequest, middleware::Logger, http::header::ContentType};
 use std::env::var;
 use env_logger::Env;
+use gethostname::gethostname;
 
 #[get("/ping")]
 async fn ping(req: HttpRequest) -> impl Responder {
@@ -14,6 +15,8 @@ async fn ping(req: HttpRequest) -> impl Responder {
     };
     header_string.pop();
     header_string.push_str("}");
+
+    println!("Hostname: {:?}", gethostname());
 
     HttpResponse::Ok().content_type(ContentType::json()).body(header_string)
 }
