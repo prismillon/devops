@@ -29,3 +29,16 @@ cd devops
 docker build . -t <nom_image> -f stage2.Dockerfile
 docker run -it --rm -p 8080:8080 <nom_image>
 ```
+
+## TP04
+
+```
+echo.yml
+```
+```bash
+cat /etc/hosts
+# start of custom messy manual edit
+127.0.0.1 echo
+```
+
+![Alt text](image.png)

@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "kubernetes://schema/v1@service+v1@persistentvolumeclaim+apps/v1@deployment+v1@service+v1@persistentvolumeclaim+apps/v1@deployment+v1@secret": "file:///Users/pierre/github/devops/bonus/wp.yml"
+    }
+}
